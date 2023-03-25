@@ -64,40 +64,53 @@ public class HeadServer implements Runnable {
 		}
 	}
 	
+	private synchronized boolean[] connecting() {
+		
+		try {
+			if(isConnecting) {
+				System.out.println("Connceting...");
+				if(createServer)  {
+					serverSocket = new ServerSocket(0);
+					serverSocket.setSoTimeout(0);
+					
+					this.ADRESS = InetAddress.getLocalHost().getHostAddress();
+					this.PORT = serverSocket.getLocalPort();
+					System.out.println(this.ADRESS+":"+this.PORT);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new boolean[] {isConnecting, createServer};
+	}
+	
 	
 	@Override
 	public void run() {
 		while (true) {
-			synchronized (this) {
-				if(isConnecting) {
-					try {
-						System.out.println("Connceting...");
-						if(createServer)  {
-							serverSocket = new ServerSocket(0);
-							serverSocket.setSoTimeout(0);
-							
-							this.ADRESS = InetAddress.getLocalHost().getHostAddress();
-							this.PORT = serverSocket.getLocalPort();
-							System.out.println(this.ADRESS+":"+this.PORT);
-							
-							socket = serverSocket.accept();
-						} else {
-							socket = new Socket(this.ADRESS, this.PORT);
-						}
-						
-						out = new BufferedReader(
-								new InputStreamReader(socket.getInputStream()));
+			boolean[] connectionResult = connecting();
+			
+			try {
+				if(connectionResult[0]) {
+					if(connectionResult[1]) {
+						socket = serverSocket.accept();
+					} else {
+						socket = new Socket(this.ADRESS, this.PORT);
+					}
+					System.out.println("Connected!");
+					
+					synchronized (this) {
+						out = new BufferedReader(new InputStreamReader(
+								socket.getInputStream()));
 						
 						in = new PrintWriter(socket.getOutputStream(), true);
 						
-						isConnecting = false;
-						System.out.println("Connected!");
-					} catch (Exception e) {
-						System.out.println("Connection failed");
-						e.printStackTrace();
-						closeConnection();
 					}
 				}
+			} catch (Exception e) {
+				System.out.println("Connection failed!");
+				e.printStackTrace();
 			}
 			
 			try {
@@ -113,5 +126,4 @@ public class HeadServer implements Runnable {
 			}
 		}
 	}
-
 }
