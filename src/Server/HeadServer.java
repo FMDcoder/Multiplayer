@@ -45,16 +45,10 @@ public class HeadServer implements Runnable {
 			if(socket != null) {
 				socket.close();
 			}
-			else if(!socket.isClosed() || socket.isConnected()) {
-				socket.close();
-			}
 			
 			if(serverSocket != null) {
 				serverSocket.close();
 			} 
-			else if(!serverSocket.isClosed()) {
-				serverSocket.close();
-			}
 			
 			System.out.println("Connection closed");
 		} catch (Exception e) {
@@ -74,33 +68,35 @@ public class HeadServer implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			if(isConnecting) {
-				try {
-					System.out.println("Connceting...");
-					if(createServer)  {
-						serverSocket = new ServerSocket(0);
-						serverSocket.setSoTimeout(0);
+			synchronized (this) {
+				if(isConnecting) {
+					try {
+						System.out.println("Connceting...");
+						if(createServer)  {
+							serverSocket = new ServerSocket(0);
+							serverSocket.setSoTimeout(0);
+							
+							this.ADRESS = InetAddress.getLocalHost().getHostAddress();
+							this.PORT = serverSocket.getLocalPort();
+							System.out.println(this.ADRESS+":"+this.PORT);
+							
+							socket = serverSocket.accept();
+						} else {
+							socket = new Socket(this.ADRESS, this.PORT);
+						}
 						
-						this.ADRESS = InetAddress.getLocalHost().getHostAddress();
-						this.PORT = serverSocket.getLocalPort();
-						System.out.println(this.ADRESS+":"+this.PORT);
+						out = new BufferedReader(
+								new InputStreamReader(socket.getInputStream()));
 						
-						socket = serverSocket.accept();
-					} else {
-						socket = new Socket(this.ADRESS, this.PORT);
+						in = new PrintWriter(socket.getOutputStream(), true);
+						
+						isConnecting = false;
+						System.out.println("Connected!");
+					} catch (Exception e) {
+						System.out.println("Connection failed");
+						e.printStackTrace();
+						closeConnection();
 					}
-					
-					out = new BufferedReader(
-							new InputStreamReader(socket.getInputStream()));
-					
-					in = new PrintWriter(socket.getOutputStream(), true);
-					
-					isConnecting = false;
-					System.out.println("Connected!");
-				} catch (Exception e) {
-					System.out.println("Connection failed");
-					e.printStackTrace();
-					closeConnection();
 				}
 			}
 			
