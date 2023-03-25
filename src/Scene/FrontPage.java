@@ -46,7 +46,10 @@ public class FrontPage extends SceneClass {
 								
 								int port = Integer.parseInt(fp.port.text);
 								
+								Main.serverThread.createServer(port);
 								Main.client.connect(fp.address.text, port);
+								
+								Main.sh.selectScene("Playground");
 								return;
 							}
 							fp.invokeError("Port or Address does not have the right format");
@@ -64,7 +67,7 @@ public class FrontPage extends SceneClass {
 	private InputField
 					port = new InputField("Port", "\\d+", 0.28f, 0.5f, 0.2f, 0.1f),
 					address = new InputField("IP address", 
-							"\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}", 0.62f, 0.5f, 0.4f, 0.1f);
+							"^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$", 0.62f, 0.5f, 0.4f, 0.1f);
 	@Override
 	public void setup() {
 		errorTitle.color = new Color(230, 0, 0);

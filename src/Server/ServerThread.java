@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.LinkedList;
@@ -32,6 +33,15 @@ public class ServerThread implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
+		}
+	}
+	
+	public synchronized void createServer(int port) {
+		createServer = true;
+		try {
+			serverSocket = new ServerSocket(port);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -88,10 +98,11 @@ public class ServerThread implements Runnable {
 						socket = serverSocket.accept();
 						
 						System.out.println("Server connected!");
-						System.out.println(serverSocket.getLocalPort());
 						
-						adress = socket.getInetAddress().getHostAddress();
+						adress = InetAddress.getLocalHost().getHostAddress();
 						port = socket.getLocalPort();
+						
+						System.out.println(adress+":"+port);
 						
 						pw = new PrintWriter(socket.getOutputStream(), false);
 						br = new BufferedReader(
@@ -107,7 +118,6 @@ public class ServerThread implements Runnable {
 				if(br != null) {
 					String line;
 					while(br.ready()) {
-					
 						line = br.readLine();
 						System.out.println(line);
 						Main.pack.interperate(line);
