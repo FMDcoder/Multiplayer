@@ -106,10 +106,12 @@ public class HeadServer implements Runnable {
 			}
 			
 			try {
-				String line;
-				while(out.ready()) {
-					line = out.readLine();
-					System.out.println(line);
+				if(out != null) {
+					String line;
+					while(out.ready()) {
+						line = out.readLine();
+						System.out.println(line);
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
