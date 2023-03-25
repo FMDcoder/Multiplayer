@@ -13,8 +13,7 @@ public class Package {
 	public void interperate(String line) {
 		String[] data = line.split(":");
 		
-		switch (data[0]) {
-		case "USERINFO":
+		if(data[0].equals("USERINFO")) {
 			try {
 				float 
 					x = Float.valueOf(data[2]),
@@ -28,10 +27,6 @@ public class Package {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			break;
-
-		default:
-			break;
 		}
 	}
 }
