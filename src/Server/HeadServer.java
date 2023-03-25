@@ -111,6 +111,12 @@ public class HeadServer implements Runnable {
 			} catch (Exception e) {
 				System.out.println("Connection failed!");
 				e.printStackTrace();
+				
+				synchronized (this) {
+					isConnecting = false;
+					createServer = false;
+					
+				}
 			}
 			
 			try {
