@@ -74,8 +74,8 @@ public class HeadServer implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			if(isConnecting) {
-				synchronized (this) {
+			synchronized (this) {
+				if(isConnecting) {
 					try {
 						System.out.println("Connceting...");
 						if(createServer)  {
