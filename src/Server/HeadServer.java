@@ -105,7 +105,8 @@ public class HeadServer implements Runnable {
 								socket.getInputStream()));
 						
 						in = new PrintWriter(socket.getOutputStream(), true);
-						
+						isConnecting = false;
+						createServer = false;
 					}
 				}
 			} catch (Exception e) {
