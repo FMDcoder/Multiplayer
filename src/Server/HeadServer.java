@@ -83,6 +83,7 @@ public class HeadServer implements Runnable {
 							
 							this.ADRESS = InetAddress.getLocalHost().getHostName();
 							this.PORT = serverSocket.getLocalPort();
+							System.out.println(this.ADRESS+":"+this.PORT);
 							
 							socket = serverSocket.accept();
 						} else {

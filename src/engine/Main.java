@@ -14,7 +14,7 @@ public class Main extends JFrame implements Runnable {
 	
 	public int FPS = 0;
 	
-	public static HeadServer hs = new HeadServer();
+	public static HeadServer headServer = new HeadServer();
 	
 	public static SceneSizer SCS = new SceneSizer();
 	public static SceneHandler sh = new SceneHandler();
@@ -30,7 +30,7 @@ public class Main extends JFrame implements Runnable {
 		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
-				hs.closeConnection();
+				headServer.closeConnection();
 		        System.exit(0);
 		    }
 		});
@@ -58,7 +58,7 @@ public class Main extends JFrame implements Runnable {
 		window();
 		
 		Thread t1 = new Thread(this);
-		Thread t2 = new Thread(hs);
+		Thread t2 = new Thread(headServer);
 		
 		t2.start();
 		t1.start();
