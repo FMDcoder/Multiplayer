@@ -7,6 +7,14 @@ import java.util.LinkedList;
 public class PlayerHandler {
 	public LinkedList<Player> players = new LinkedList<>();
 	
+	public void handlePlayer(Player plr) {
+		if(getPlayer(plr.name) == null) {
+			addPlayer(plr);
+			return;
+		}
+		setValues(plr);
+	}
+	
 	public void addPlayer(Player plr) {
 		players.add(plr);
 	}
@@ -44,11 +52,11 @@ public class PlayerHandler {
 		return null;
 	}
 	
-	public void setValues(String name, int x, int y) {
-		Player plr = getPlayer(name);
+	public void setValues(Player player) {
+		Player plr = getPlayer(player.name);
 		if(plr != null) {
-			plr.X = x;
-			plr.Y = x;
+			plr.X = player.X;
+			plr.Y = player.Y;
 		}
 	}
 	

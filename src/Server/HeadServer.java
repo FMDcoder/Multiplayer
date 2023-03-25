@@ -123,7 +123,7 @@ public class HeadServer implements Runnable {
 			try {
 				if(out != null) {
 					String line;
-					while(out.ready()) {
+					while(out.ready() && !socket.isClosed()) {
 						line = out.readLine();
 						System.out.println(line);
 					}
