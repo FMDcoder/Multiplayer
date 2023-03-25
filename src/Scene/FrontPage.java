@@ -32,7 +32,7 @@ public class FrontPage extends SceneClass {
 							FrontPage fp = (FrontPage)Main.sh.getSelectedScene();
 							
 							int port = Main.serverThread.createServer();
-							Main.client.connect(port);
+							//Main.client.connect(port);
 							
 							Main.sh.selectScene("Playground");
 						}

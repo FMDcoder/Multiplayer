@@ -31,7 +31,6 @@ public class Playground extends SceneClass{
 			if(pg.nameInput.matchesRegex()) {
 				if(pg.plrhandler.isUniqueName(nameInput.text)) {
 					plr.name = nameInput.text;
-					plrhandler.addPlayer(new Player(nameInput.text, 0.5f, 0.5f));
 					intro = false;
 				}
 				return;
@@ -89,7 +88,7 @@ public class Playground extends SceneClass{
 			submitName.render(g2);
 			return;
 		}
-		
+		plr.render(g2);
 		plrhandler.renderPlayer(g2, plr);
 	}
 	

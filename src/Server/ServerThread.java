@@ -29,6 +29,9 @@ public class ServerThread implements Runnable {
 		createServer = true;
 		try {
 			serverSocket = new ServerSocket(0);
+			System.out.println("192.168.1.153:"+serverSocket.getLocalPort());
+			serverSocket.accept();
+			
 			return serverSocket.getLocalPort();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,7 +57,7 @@ public class ServerThread implements Runnable {
 			br = new BufferedReader(
 					new InputStreamReader(socket.getInputStream()));
 			
-			pw = new PrintWriter(socket.getOutputStream());
+			pw = new PrintWriter(socket.getOutputStream(), true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -82,11 +85,8 @@ public class ServerThread implements Runnable {
 	}
 	
 	public synchronized void sendMessage(String str) {
-		try {
-			pw.println(str);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		System.out.println(socket.getRemoteSocketAddress());
+		pw.println(str);
 	}
 	
 	@Override
@@ -104,7 +104,7 @@ public class ServerThread implements Runnable {
 						
 						System.out.println(adress+":"+port);
 						
-						pw = new PrintWriter(socket.getOutputStream(), false);
+						pw = new PrintWriter(socket.getOutputStream(), true);
 						br = new BufferedReader(
 								new InputStreamReader(socket.getInputStream()));
 					} catch (Exception e) {

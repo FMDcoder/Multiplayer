@@ -20,6 +20,14 @@ public class MainPlayer {
 		Main.serverThread.sendMessage(msg);
 	}
 	
+	public void render(Graphics2D g2) {
+		g2.setColor(Color.BLUE);
+		g2.fillRect(
+				240,
+				240,
+				40, 40);
+	}
+	
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_W:

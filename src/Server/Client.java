@@ -2,6 +2,7 @@ package Server;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.LinkedList;
 
@@ -14,7 +15,7 @@ public class Client {
 	
 	public void connect(int port) {
 		try {
-			socket = new Socket("localhost", port);
+			socket = new Socket(InetAddress.getLocalHost(), port);
 			
 			System.out.println("User connected");
 		} catch (Exception e) {
