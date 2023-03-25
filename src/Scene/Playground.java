@@ -71,6 +71,7 @@ public class Playground extends SceneClass{
 			return;
 		}
 		plr.tick();
+		plrhandler.tickPlayer();
 	}
 
 	@Override
