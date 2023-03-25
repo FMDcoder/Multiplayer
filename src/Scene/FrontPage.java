@@ -31,8 +31,6 @@ public class FrontPage extends SceneClass {
 						public void trigger() {
 							FrontPage fp = (FrontPage)Main.sh.getSelectedScene();
 							
-							int port = Main.serverThread.createServer();
-							//Main.client.connect(port);
 							
 							Main.sh.selectScene("Playground");
 						}
@@ -45,9 +43,6 @@ public class FrontPage extends SceneClass {
 							if(fp.port.matchesRegex()&& fp.address.matchesRegex()) {
 								
 								int port = Integer.parseInt(fp.port.text);
-								
-								Main.serverThread.createServer(port);
-								Main.client.connect(fp.address.text, port);
 								
 								Main.sh.selectScene("Playground");
 								return;

@@ -8,15 +8,9 @@ import javax.swing.*;
 import Interaction.Keyboard;
 import Interaction.Mouse;
 import Scene.*;
-import Server.ServerThread;
-import Server.Client;
-import Server.Package;
 
 public class Main extends JFrame implements Runnable {
 	
-	public static ServerThread serverThread = new ServerThread();
-	public static Client client = new Client();
-	public static Package pack = new Package();
 	public int FPS = 0;
 	
 	public static SceneSizer SCS = new SceneSizer();
@@ -33,7 +27,6 @@ public class Main extends JFrame implements Runnable {
 		
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
-				serverThread.closeConnection();
 		        System.exit(0);
 		    }
 		});
@@ -61,11 +54,9 @@ public class Main extends JFrame implements Runnable {
 		window();
 		
 		Thread t1 = new Thread(this);
-		Thread t2 = new Thread(serverThread);
 		
 		t1.setPriority(Thread.MAX_PRIORITY);
-		t2.setPriority(Thread.MAX_PRIORITY);
-		t2.start();
+		
 		t1.start();
 	}
 

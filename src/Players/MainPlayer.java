@@ -13,11 +13,6 @@ public class MainPlayer {
 	public void tick() {
 		x += vx;
 		y += vy;
-		
-		String msg = Main.pack.packageData(
-				"USERINFO",this.name, String.valueOf(x), String.valueOf(y));
-		
-		Main.serverThread.sendMessage(msg);
 	}
 	
 	public void render(Graphics2D g2) {
