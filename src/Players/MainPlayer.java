@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+
+import Server.Package;
 import engine.Main;
 
 public class MainPlayer {
@@ -13,6 +15,11 @@ public class MainPlayer {
 	public void tick() {
 		x += vx;
 		y += vy;
+		
+		String output = Package.pack(
+				"USERINFO", this.name, String.valueOf(x), String.valueOf(y));
+		
+		Main.headServer.sendMessage(output);
 	}
 	
 	public void render(Graphics2D g2) {

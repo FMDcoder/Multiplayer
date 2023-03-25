@@ -62,7 +62,7 @@ public class HeadServer implements Runnable {
 		}
 	}
 	
-	public synchronized void println(String line) {
+	public synchronized void sendMessage(String line) {
 		try {
 			in.println(line);
 		} catch (Exception e) {
@@ -80,8 +80,9 @@ public class HeadServer implements Runnable {
 						System.out.println("Connceting...");
 						if(createServer)  {
 							serverSocket = new ServerSocket(0);
+							serverSocket.setSoTimeout(0);
 							
-							this.ADRESS = InetAddress.getLocalHost().getHostName();
+							this.ADRESS = InetAddress.getLocalHost().getHostAddress();
 							this.PORT = serverSocket.getLocalPort();
 							System.out.println(this.ADRESS+":"+this.PORT);
 							
