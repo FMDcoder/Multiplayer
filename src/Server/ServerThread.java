@@ -14,9 +14,7 @@ import engine.Main;
 public class ServerThread implements Runnable {
 	
 	private boolean 
-		createServer = false,
-		createClient = false,
-		sendMessage = false;
+		createServer = false;
 		
 	public ServerSocket serverSocket;
 	public Socket socket;
@@ -25,8 +23,6 @@ public class ServerThread implements Runnable {
 	
 	public String adress;
 	public int port;
-	
-	private LinkedList<String> messages = new LinkedList<String>();
 	
 	public synchronized int createServer() {
 		createServer = true;
@@ -76,8 +72,11 @@ public class ServerThread implements Runnable {
 	}
 	
 	public synchronized void sendMessage(String str) {
-		messages.add(str);
-		sendMessage = true;
+		try {
+			pw.println(str);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -89,6 +88,7 @@ public class ServerThread implements Runnable {
 						socket = serverSocket.accept();
 						
 						System.out.println("Server connected!");
+						System.out.println(serverSocket.getLocalPort());
 						
 						adress = socket.getInetAddress().getHostAddress();
 						port = socket.getLocalPort();
@@ -101,33 +101,21 @@ public class ServerThread implements Runnable {
 					}
 					createServer = false;
 				}
-				try {
-					if(sendMessage) {
-						String s = messages.poll();
-						if(s != null) {
-							pw.println(s);
-						}
-						if(messages.peek() == null) {
-							sendMessage = false;
-						}
+			}
+			
+			try {
+				if(br != null) {
+					String line;
+					while(br.ready()) {
+					
+						line = br.readLine();
+						System.out.println(line);
+						Main.pack.interperate(line);
 					}
-				} 
-				catch (Exception e) {
-					e.printStackTrace();
 				}
-				try {
-					if(br != null) {
-						String line;
-						while(br.ready()) {
-							line = br.readLine();
-							System.out.println(line);
-							Main.pack.interperate(line);
-						}
-					}
-				} 
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

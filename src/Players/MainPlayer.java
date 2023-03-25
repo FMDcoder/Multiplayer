@@ -1,5 +1,8 @@
 package Players;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import engine.Main;
 
@@ -20,16 +23,16 @@ public class MainPlayer {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_W:
-				vx = -0.1;
+				vy = -1;
 				break;
 			case KeyEvent.VK_S:
-				vx = 0.1;
+				vy = 1;
 				break;
 			case KeyEvent.VK_A:
-				vy = -0.1;
+				vx = -1;
 				break;
 			case KeyEvent.VK_D:
-				vy = 0.1;
+				vx = 1;
 				break;
 			default:
 				break;
@@ -39,16 +42,16 @@ public class MainPlayer {
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_W:
-				vx = 0;
+				vy = 0;
 				break;
 			case KeyEvent.VK_S:
-				vx = 0;
+				vy = 0;
 				break;
 			case KeyEvent.VK_A:
-				vy = 0;
+				vx = 0;
 				break;
 			case KeyEvent.VK_D:
-				vy = 0;
+				vx = 0;
 				break;
 			default:
 				break;

@@ -25,7 +25,10 @@ public class PlayerHandler {
 	}
 	
 	public void renderPlayer(Graphics2D g2, MainPlayer mplr) {
-		Point relativ = new Point((int)mplr.x,(int)mplr.y);
+		Point relativ = new Point(
+				(int)(mplr.x),
+				(int)(mplr.y)
+		);
 		
 		for(Player plr: players) {
 			plr.render(g2, relativ);
@@ -41,11 +44,11 @@ public class PlayerHandler {
 		return null;
 	}
 	
-	public void setValues(Player user) {
-		Player plr = getPlayer(user.name);
+	public void setValues(String name, int x, int y) {
+		Player plr = getPlayer(name);
 		if(plr != null) {
-			plr.X = user.X;
-			plr.Y = user.Y;
+			plr.X = x;
+			plr.Y = x;
 		}
 	}
 	

@@ -89,6 +89,8 @@ public class Playground extends SceneClass{
 			submitName.render(g2);
 			return;
 		}
+		
+		plrhandler.renderPlayer(g2, plr);
 	}
 	
 	public void mouseMoved(MouseEvent e) {

@@ -25,6 +25,9 @@ public class Player{
 	
 	public void render(Graphics2D g2, Point relativTo) {
 		g2.setColor(Color.RED);
-		g2.fillRect(pos.x - relativTo.x,pos.y - relativTo.y, 40, 40);
+		g2.fillRect(
+				relativTo.x - pos.x + Main.SCS.cX + (Main.SCS.width >> 1),
+				relativTo.y - pos.y + Main.SCS.cY + (Main.SCS.height >> 1), 
+				40, 40);
 	}
 }

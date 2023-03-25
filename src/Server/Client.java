@@ -3,6 +3,7 @@ package Server;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.LinkedList;
 
 import engine.Main;
 
@@ -10,8 +11,6 @@ public class Client {
 	public Socket socket;
 	public BufferedReader br;
 	public PrintWriter pw;
-	
-	private boolean connected = false;
 	
 	public void connect(int port) {
 		try {

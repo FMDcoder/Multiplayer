@@ -2,7 +2,7 @@ package Server;
 
 public class Package {
 	public void interperate(String line) {
-		
+		System.out.println(line);
 	}
 	
 	public String packageData(String... data) {
