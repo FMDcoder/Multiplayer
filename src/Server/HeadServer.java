@@ -101,12 +101,12 @@ public class HeadServer implements Runnable {
 					System.out.println("Connected!");
 					
 					synchronized (this) {
+						isConnecting = false;
+						
 						out = new BufferedReader(new InputStreamReader(
 								socket.getInputStream()));
 						
 						in = new PrintWriter(socket.getOutputStream(), true);
-						isConnecting = false;
-						createServer = false;
 					}
 				}
 			} catch (Exception e) {
@@ -129,7 +129,7 @@ public class HeadServer implements Runnable {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.print(e.getMessage());
 			}
 		}
 	}
