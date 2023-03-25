@@ -74,35 +74,33 @@ public class HeadServer implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			synchronized (this) {
-				if(isConnecting) {
-					try {
-						System.out.println("Connceting...");
-						if(createServer)  {
-							serverSocket = new ServerSocket(0);
-							serverSocket.setSoTimeout(0);
-							
-							this.ADRESS = InetAddress.getLocalHost().getHostAddress();
-							this.PORT = serverSocket.getLocalPort();
-							System.out.println(this.ADRESS+":"+this.PORT);
-							
-							socket = serverSocket.accept();
-						} else {
-							socket = new Socket(this.ADRESS, this.PORT);
-						}
+			if(isConnecting) {
+				try {
+					System.out.println("Connceting...");
+					if(createServer)  {
+						serverSocket = new ServerSocket(0);
+						serverSocket.setSoTimeout(0);
 						
-						out = new BufferedReader(
-								new InputStreamReader(socket.getInputStream()));
+						this.ADRESS = InetAddress.getLocalHost().getHostAddress();
+						this.PORT = serverSocket.getLocalPort();
+						System.out.println(this.ADRESS+":"+this.PORT);
 						
-						in = new PrintWriter(socket.getOutputStream(), true);
-						
-						isConnecting = false;
-						System.out.println("Connected!");
-					} catch (Exception e) {
-						System.out.println("Connection failed");
-						e.printStackTrace();
-						closeConnection();
+						socket = serverSocket.accept();
+					} else {
+						socket = new Socket(this.ADRESS, this.PORT);
 					}
+					
+					out = new BufferedReader(
+							new InputStreamReader(socket.getInputStream()));
+					
+					in = new PrintWriter(socket.getOutputStream(), true);
+					
+					isConnecting = false;
+					System.out.println("Connected!");
+				} catch (Exception e) {
+					System.out.println("Connection failed");
+					e.printStackTrace();
+					closeConnection();
 				}
 			}
 			
