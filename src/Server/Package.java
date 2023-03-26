@@ -15,6 +15,7 @@ public class Package {
 		
 		Playground play = (Playground)Main.sh.getSelectedScene();
 		
+		System.out.println(line);
 		switch(data[0]) {
 		case "USERINFO":
 			try {
