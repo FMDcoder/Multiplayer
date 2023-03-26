@@ -19,18 +19,15 @@ public class Player{
 	}
 
 	public void tick() {
-		pos.x = (int)(this.X * Main.SCS.width + Main.SCS.cX);
-		pos.y = (int)(this.Y * Main.SCS.height + Main.SCS.cY);
+		pos.x = (int)(this.X);
+		pos.y = (int)(this.Y);
 	}
 	
 	public void render(Graphics2D g2, Point relativTo) {
 		g2.setColor(Color.RED);
 		g2.fillRect(
-				relativTo.x - pos.x + Main.SCS.cX + (Main.SCS.width >> 1),
-				relativTo.y - pos.y + Main.SCS.cY + (Main.SCS.height >> 1), 
+				pos.x - relativTo.x + Main.SCS.cX + (Main.SCS.width >> 1),
+				pos.y - relativTo.y + Main.SCS.cY + (Main.SCS.height >> 1), 
 				40, 40);
-		
-		System.out.println((relativTo.x - pos.x + Main.SCS.cX + (Main.SCS.width >> 1))+" ; "+
-				(relativTo.y - pos.y + Main.SCS.cY + (Main.SCS.height >> 1)));
 	}
 }
