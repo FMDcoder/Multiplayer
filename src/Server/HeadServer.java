@@ -21,6 +21,8 @@ public class HeadServer implements Runnable {
 	private BufferedReader out;
 	private PrintWriter in;
 	
+	public Package pack = new Package();
+	
 	public synchronized void connect() {
 		createServer = true;
 		isConnecting = true;
@@ -125,7 +127,7 @@ public class HeadServer implements Runnable {
 					String line;
 					while(out.ready() && !socket.isClosed()) {
 						line = out.readLine();
-						System.out.println(line);
+						pack.interperate(line);
 					}
 				}
 			} catch (Exception e) {
