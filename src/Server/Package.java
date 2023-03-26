@@ -13,6 +13,7 @@ public class Package {
 	public void interperate(String line) {
 		String[] data = line.split(":");
 		
+		System.out.println(data[0]);
 		if(data[0].equals("USERINFO")) {
 			try {
 				float 

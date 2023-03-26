@@ -49,7 +49,7 @@ public class HeadServer implements Runnable {
 			if(serverSocket != null) {
 				serverSocket.close();
 			} 
-			
+			isConnecting = false;
 			System.out.println("Connection closed");
 		} catch (Exception e) {
 			e.printStackTrace();
