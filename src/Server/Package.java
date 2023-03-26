@@ -31,7 +31,7 @@ public class Package {
 			}
 			break;
 		case "DISCONNECT":
-			
+			System.out.println("User "+data[2]+" disconnected!");
 			play.plrhandler.removePlayer(data[2]);
 						if(data[1].equals("HEADCLIENT")) {
 				Main.headServer.closeConnection();
