@@ -7,6 +7,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import Scene.Playground;
+import engine.Main;
+
 public class HeadServer implements Runnable {
 	
 	private boolean 
@@ -14,7 +17,7 @@ public class HeadServer implements Runnable {
 		createServer = false;
 	
 	private int PORT;
-	private String ADRESS;
+	private String ADRESS, TYPEOFCONNECTION;
 	
 	private ServerSocket serverSocket;
 	private Socket socket;
@@ -26,11 +29,15 @@ public class HeadServer implements Runnable {
 	public synchronized void connect() {
 		createServer = true;
 		isConnecting = true;
+		
+		this.TYPEOFCONNECTION = "HEADCLIENT";
 	}
 	
 	public synchronized void connect(String adress, int port) {
 		this.ADRESS = adress;
 		this.PORT = port;
+		
+		this.TYPEOFCONNECTION = "SIDECLIENT";
 		
 		createServer = false;
 		isConnecting = true;
@@ -45,6 +52,12 @@ public class HeadServer implements Runnable {
 			}
 			
 			if(socket != null) {
+				
+				Playground play = (Playground)Main.sh.getSelectedScene();
+				
+				sendMessage(Package.pack("DISCONNECT",
+						this.TYPEOFCONNECTION, play.plr.name));
+				
 				socket.close();
 			}
 			
