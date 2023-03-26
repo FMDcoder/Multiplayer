@@ -29,5 +29,8 @@ public class Player{
 				relativTo.x - pos.x + Main.SCS.cX + (Main.SCS.width >> 1),
 				relativTo.y - pos.y + Main.SCS.cY + (Main.SCS.height >> 1), 
 				40, 40);
+		
+		System.out.println((relativTo.x - pos.x + Main.SCS.cX + (Main.SCS.width >> 1))+" ; "+
+				(relativTo.y - pos.y + Main.SCS.cY + (Main.SCS.height >> 1)));
 	}
 }
