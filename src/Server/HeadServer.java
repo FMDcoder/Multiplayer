@@ -46,19 +46,19 @@ public class HeadServer implements Runnable {
 	public synchronized void closeConnection () {
 		try {
 			
+			if(socket != null) {
+				Playground play = (Playground)Main.sh.getSelectedScene();
+				
+				sendMessage(Package.pack("DISCONNECT",
+						this.TYPEOFCONNECTION, play.plr.name));
+			}
+			
 			if(out != null && in != null) {
 				out.close();
 				in.close();
 			}
 			
 			if(socket != null) {
-				
-				Playground play = (Playground)Main.sh.getSelectedScene();
-				
-				sendMessage(Package.pack("DISCONNECT",
-						this.TYPEOFCONNECTION, play.plr.name));
-				
-				
 				socket.close();
 			}
 			
@@ -74,7 +74,6 @@ public class HeadServer implements Runnable {
 	
 	public synchronized void sendMessage(String line) {
 		try {
-			System.out.println(line);
 			in.println(line);
 		} catch (Exception e) {
 			// TODO: handle exception
