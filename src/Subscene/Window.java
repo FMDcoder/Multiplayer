@@ -17,10 +17,6 @@ public class Window extends Subscene {
 
 	@Override
 	public void tick() {
-		shape = new Rectangle(
-				(int)(Main.SCS.cX + Main.SCS.width * 0.3),
-				(int)(Main.SCS.cY + Main.SCS.height * 0.3)
-		)
 	}
 
 	@Override
