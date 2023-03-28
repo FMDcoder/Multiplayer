@@ -58,6 +58,7 @@ public class HeadServer implements Runnable {
 				sendMessage(Package.pack("DISCONNECT",
 						this.TYPEOFCONNECTION, play.plr.name));
 				
+				
 				socket.close();
 			}
 			
@@ -73,6 +74,7 @@ public class HeadServer implements Runnable {
 	
 	public synchronized void sendMessage(String line) {
 		try {
+			System.out.println(line);
 			in.println(line);
 		} catch (Exception e) {
 			// TODO: handle exception
