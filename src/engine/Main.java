@@ -15,7 +15,6 @@ public class Main extends JFrame implements Runnable {
 	public int FPS = 0;
 	
 	public static HeadServer headServer = new HeadServer();
-	
 	public static SceneSizer SCS = new SceneSizer();
 	public static SceneHandler sh = new SceneHandler();
 	
@@ -129,6 +128,14 @@ public class Main extends JFrame implements Runnable {
 		g2.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
 		renderSettings(g2);
+		
+		int 
+			xp = SCS.cX, 
+			yp = SCS.cY, 
+			wl = SCS.width,
+			hl = SCS.height;
+		
+		g2.clip(new Rectangle(xp, yp, wl, hl));
 		
 		sh.render(g2);
 		

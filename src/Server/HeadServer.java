@@ -76,7 +76,7 @@ public class HeadServer implements Runnable {
 		try {
 			in.println(line);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	
