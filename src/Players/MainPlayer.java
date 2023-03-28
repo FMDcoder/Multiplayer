@@ -10,7 +10,7 @@ import engine.Main;
 
 public class MainPlayer {
 	public String name;
-	public double x, y, vx, vy;
+	public double x = 0, y = 0, vx = 0, vy = 0;
 
 	public void tick() {
 		x += vx;

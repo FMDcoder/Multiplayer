@@ -74,6 +74,14 @@ public class HeadServer implements Runnable {
 	
 	public synchronized void sendMessage(String line) {
 		try {
+			if(in == null) {
+				return;
+			}
+			
+			if(in.checkError()) {
+				return;
+			}
+			
 			in.println(line);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -139,6 +147,7 @@ public class HeadServer implements Runnable {
 			try {
 				if(out != null) {
 					String line;
+					
 					while(out.ready() && !socket.isClosed()) {
 						line = out.readLine();
 						pack.interperate(line);
