@@ -2,8 +2,12 @@ package Scene;
 import java.awt.*;
 import java.util.*;
 
+import Subscene.Subscene;
+
 public class SceneHandler {
 	private HashMap<String, SceneClass> scenes = new HashMap<String, SceneClass>();
+	private ArrayList<Subscene> subscenes = new ArrayList<>();
+	
 	private SceneClass selected = null;
 	
 	public SceneClass getScene(String key) {
@@ -26,6 +30,10 @@ public class SceneHandler {
 		scenes.put(key, scene);
 	}
 	
+	public void addSubScene(Subscene sub) {
+		subscenes.add(sub);
+	}
+	
 	public void removeScene(String key) {
 		scenes.remove(key);
 	}
@@ -35,6 +43,20 @@ public class SceneHandler {
 			return;
 		}
 		selected.tick();
+		
+		ArrayList<Integer> destroy = new ArrayList<>();
+		
+		for(int i = 0; i < subscenes.size(); i++) {
+			Subscene sub = subscenes.get(i);
+			sub.tick();
+			if(sub.needSelfDestruct()) {
+				destroy.add(i);
+			}
+		}
+		
+		for(int v: destroy) {
+			subscenes.remove(v);
+		}
 	}
 	
 	public void render(Graphics2D g2) {
@@ -42,5 +64,9 @@ public class SceneHandler {
 			return;
 		}
 		selected.render(g2);
+		
+		for(Subscene sub: subscenes) {
+			sub.render(g2);
+		}
 	}
 }

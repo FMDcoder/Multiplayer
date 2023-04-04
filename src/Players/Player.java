@@ -19,8 +19,8 @@ public class Player{
 	}
 
 	public void tick() {
-		pos.x = (int)(this.X);
-		pos.y = (int)(this.Y);
+		pos.x = Main.SCS.convertValueWithRatio(this.X);
+		pos.y = Main.SCS.convertValueWithRatio(this.Y);
 	}
 	
 	public void render(Graphics2D g2, Point relativTo) {
@@ -28,6 +28,8 @@ public class Player{
 		g2.fillRect(
 				pos.x - relativTo.x + Main.SCS.cX + (Main.SCS.width >> 1),
 				pos.y - relativTo.y + Main.SCS.cY + (Main.SCS.height >> 1), 
-				40, 40);
+				Main.SCS.convertValueWithRatio(40), 
+				Main.SCS.convertValueWithRatio(40)
+		);
 	}
 }

@@ -25,9 +25,10 @@ public class MainPlayer {
 	public void render(Graphics2D g2) {
 		g2.setColor(Color.BLUE);
 		g2.fillRect(
-				240,
-				240,
-				40, 40);
+				(Main.SCS.width >> 1) + Main.SCS.cX,
+				(Main.SCS.height >> 1) + Main.SCS.cY,
+				Main.SCS.convertValueWithRatio(40), 
+				Main.SCS.convertValueWithRatio(40));
 	}
 	
 	public void keyPressed(KeyEvent e) {
