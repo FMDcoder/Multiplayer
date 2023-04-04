@@ -6,7 +6,7 @@ public class SceneSizer {
 	public final int[] RATIO = {16, 9};
 	
 	public int cX = 0, cY = 0, width = 0, height = 0;
-	private float ratio = 1;
+	private double ratio = 1;
 	
 	public int convertValueWithRatio(int value) {
 		return (int)(ratio * value);
@@ -35,6 +35,6 @@ public class SceneSizer {
 		cX = (w - width) >> 1;
 		cY = (h - height + windowOptionsHeight) >> 1;
 		
-		ratio = (width * height) / 250000;
+		ratio = (width * height) / 140625.0;
 	}
 }
