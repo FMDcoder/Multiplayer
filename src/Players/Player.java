@@ -24,12 +24,18 @@ public class Player{
 	}
 	
 	public void render(Graphics2D g2, Point relativTo) {
+		
+		int sizeScale = Main.SCS.convertValueWithRatio(40);
+		
 		g2.setColor(Color.RED);
 		g2.fillRect(
-				pos.x - relativTo.x + Main.SCS.cX + (Main.SCS.width >> 1),
-				pos.y - relativTo.y + Main.SCS.cY + (Main.SCS.height >> 1), 
-				Main.SCS.convertValueWithRatio(40), 
-				Main.SCS.convertValueWithRatio(40)
+				pos.x - relativTo.x + Main.SCS.cX + 
+				(Main.SCS.width >> 1) - (sizeScale >> 1),
+				
+				pos.y - relativTo.y + Main.SCS.cY + 
+				(Main.SCS.height >> 1) - (sizeScale >> 1), 
+				
+				sizeScale, sizeScale
 		);
 	}
 }
